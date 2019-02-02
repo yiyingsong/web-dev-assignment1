@@ -1,0 +1,10 @@
+a {
+    color: blueviolet;
+    font-size: 16pt;
+    margin: auto;
+}
+
+.container {
+    padding: 30px;
+    text-align: center;
+}
