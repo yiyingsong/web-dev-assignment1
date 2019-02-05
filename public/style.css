@@ -45,3 +45,13 @@
 .content {
     margin-bottom: 80px;
 }
+label {
+    font-weight: bold;
+}
+#title {
+    text-align: center;
+    margin-top: 20px;
+}
+.fa-bars {
+    margin-left: 5px;
+}
