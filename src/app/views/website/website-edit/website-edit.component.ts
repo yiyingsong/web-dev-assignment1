@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../services/user.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import {Website} from '../../../models/website.model.client';
-import {User} from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-website-edit',
@@ -13,33 +11,46 @@ import {User} from '../../../models/user.model.client';
 export class WebsiteEditComponent implements OnInit {
 
   userId: String;
-  user: User;
   websiteId: String;
   website: Website;
   websites: any;
 
-  constructor(private userService: UserService, private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router,
+              private sharedService: SharedService) { }
 
   updateWebsite() {
-    this.websiteService.updateWebsite(this.websiteId, this.website);
-    console.log(this.website);
+    this.website._id = this.websiteId;
+    this.websiteService.updateWebsite(this.websiteId, this.website).subscribe((website: Website) => {
+      this.website = website;
+      this.websiteService.findWebsitesByUser(this.userId).subscribe((data: any) => {
+        this.sharedService.websites = data;
+      });
+    });
   }
 
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
+    this.websiteService.deleteWebsite(this.websiteId).subscribe((website: Website) => {
+      this.websiteService.findWebsitesByUser(this.userId).subscribe((data: any) => {
+        this.sharedService.websites = data;
+      });
+    });
   }
   ngOnInit() {
-    this.activatedRoute.params
-        .subscribe(
-            (params: any) => {
-              this.userId = params['uid'];
-              this.websiteId = params['wid'];
-            }
-        );
-    this.user = this.userService.findUserById(this.userId);
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
+    this.websites = this.sharedService.websites;
+    this.activatedRoute.params.subscribe(
+        (params: any) => {
+          this.userId = params['uid'];
+          this.websiteId = params['wid'];
+        }
+    );
+    this.websiteService.findWebsiteById(this.websiteId).subscribe(
+        (website: Website) => {
+          this.website = website;
+        });
+    this.websiteService.findWebsitesByUser(this.userId).subscribe(
+        (websites: any) => {
+          this.websites = websites;
+        });
   }
 
 }
-

@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {Router} from '@angular/router';
@@ -17,20 +15,27 @@ export class RegisterComponent implements OnInit {
   errorFlag: boolean;
   errorMsg = 'Password mis-matching!';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private shareService: SharedService) { }
 
   register() {
     if ( this.v_password === this.user.password) {
       this.errorFlag = false;
-      this.user = this.userService.createUser(this.user);
-      console.log(this.user);
-      this.router.navigate(['/user', this.user._id]);
+      this.userService.findUserByCredential(this.user.username, this.user.password)
+          .subscribe((user: User) => {
+            if (!user) {
+              this.userService.createUser(this.user).subscribe((data: User) => {
+                this.user = data;
+                this.shareService.user = data;
+                this.router.navigate(['user/', this.user._id]);
+              });
+            }
+          });
     } else {
       this.errorFlag = true;
     }
   }
 
   ngOnInit() {
-    this.user = new User('', '', '');
+    this.user = new User('', '');
   }
 }

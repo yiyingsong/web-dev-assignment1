@@ -3,28 +3,28 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-website-list',
-  templateUrl: './website-list.component.html',
-  styleUrls: ['./website-list.component.css']
+    selector: 'app-website-list',
+    templateUrl: './website-list.component.html',
+    styleUrls: ['./website-list.component.css']
 })
 
 export class WebsiteListComponent implements OnInit {
 
-  userId: String;
-  websites: any;
+    userId: String;
+    websites: any;
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+    constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private sharedService: SharedService) { }
 
-  ngOnInit() {
-
-    this.activatedRoute.params
-        .subscribe(
+    ngOnInit() {
+        this.activatedRoute.params.subscribe(
             (params: any) => {
-              this.userId = params['uid'];
+                this.userId = params['uid'];
             }
         );
-
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-  }
+        this.websiteService.findWebsitesByUser(this.userId)
+            .subscribe((data: any) => {
+                this.websites = data;
+                this.sharedService.websites = data;
+            });
+    }
 }
-
