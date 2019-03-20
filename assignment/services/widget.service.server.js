@@ -151,7 +151,7 @@ module.exports= function(app){
         let myFile        = req.file;
 
         //let baseUrl = 'http://localhost:3200';
-        let baseUrl = 'http://localhost:3200';
+        let baseUrl = 'https://web-dev-assignment1.herokuapp.com';
         const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
             + "/page/" + pageId + "/widget";
         if(myFile == null) {

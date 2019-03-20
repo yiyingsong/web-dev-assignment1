@@ -187,6 +187,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-html/widget-html.component */ "./src/app/views/widget/widget-edit/widget-html/widget-html.component.ts");
 /* harmony import */ var _views_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./views/widget/widget-edit/widget-text/widget-text.component */ "./src/app/views/widget/widget-edit/widget-text/widget-text.component.ts");
 /* harmony import */ var _services_shared_service_client__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/shared.service.client */ "./src/app/services/shared.service.client.ts");
+/* harmony import */ var _directives_directive__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./directives.directive */ "./src/app/directives.directive.ts");
+
 
 
 
@@ -239,7 +241,8 @@ var AppModule = /** @class */ (function () {
                 _views_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_20__["WidgetImageComponent"],
                 _views_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_21__["WidgetYoutubeComponent"],
                 _views_widget_widget_edit_widget_html_widget_html_component__WEBPACK_IMPORTED_MODULE_26__["WidgetHtmlComponent"],
-                _views_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_27__["WidgetTextComponent"]
+                _views_widget_widget_edit_widget_text_widget_text_component__WEBPACK_IMPORTED_MODULE_27__["WidgetTextComponent"],
+                _directives_directive__WEBPACK_IMPORTED_MODULE_29__["SortableDirective"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -252,6 +255,60 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/directives.directive.ts":
+/*!*****************************************!*\
+  !*** ./src/app/directives.directive.ts ***!
+  \*****************************************/
+/*! exports provided: SortableDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortableDirective", function() { return SortableDirective; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var SortableDirective = /** @class */ (function () {
+    function SortableDirective(el) {
+        this.el = el;
+        this.newIndexes = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // this will emit an event for the parent component or the directive calling component
+    }
+    // Lifecycle hook that is called after a component's view has been fully initialized
+    SortableDirective.prototype.ngAfterViewInit = function () {
+        this.appSortable(this);
+    };
+    SortableDirective.prototype.appSortable = function (refe) {
+        jQuery(this.el.nativeElement).sortable({
+            axis: 'y',
+            start: function (event, ui) {
+                refe.initialIndex = ui.item.index();
+            },
+            stop: function (event, ui) {
+                refe.newIndexes.emit({
+                    startIndex: refe.initialIndex,
+                    endIndex: ui.item.index()
+                });
+            }
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], SortableDirective.prototype, "newIndexes", void 0);
+    SortableDirective = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
+            selector: '[appSortable]'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"]])
+    ], SortableDirective);
+    return SortableDirective;
 }());
 
 
@@ -2069,7 +2126,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start\">\n  <a class=\"nav-item nav-link\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page\">\n    <i class=\"fas fa-chevron-left black-icons\"></i></a>\n  <a class=\"navbar-brand  white-icons\" >Widgets</a>\n  <a class=\"nav-item nav-link ml-auto\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new\">\n    <i class=\"fas fa-plus black-icons\"></i></a>\n</nav>\n\n<div class=\"content container cl-container-padding mt-5\">\n  <div class=\"widget-list\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n    <div *ngFor=\"let widget of widgets\">\n      <table class=\"table table-borderless\">\n        <tbody>\n        <tr>\n          <td>\n            <div [ngSwitch]=\"widget.widgetType\">\n\n              <div *ngSwitchCase=\"'HEADER'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <p [ngStyle]=\"{'font-size': widget.size+'00%', 'text-align': 'center'}\">{{widget.text}}</p>\n              </div>\n              <div *ngSwitchCase=\"'TEXT'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <p [ngStyle]=\"{'font-size': widget.size+'00%', 'text-align': 'center'}\">{{widget.text}}</p>\n              </div>\n\n              <div *ngSwitchCase=\"'IMAGE'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <img class=\"img-responsive img-rounded cl-widget-images\" [src]=\"widget.url\" [width]=\"toNumber(widget.width) * 640\">\n              </div>\n\n\n              <div *ngSwitchCase=\"'YOUTUBE'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <div class=\"embed-responsive embed-responsive-16by9\">\n                  <iframe [width]=\"toNumber(widget.width) * 640\" [height]=\"toNumber(widget.width) * 360\"\n                          [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"pull-right\">\n                    <span class=\"glyphicon glyphicon-menu-hamburger\"></span></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\" class=\"pull-right\">\n                    <span class=\"glyphicon glyphicon-cog\"></span></a>\n                </div>\n              </div>\n\n              <div *ngSwitchCase=\"'HTML'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <div [innerHTML]=\"widget.text\"></div>\n              </div>\n            </div>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n\n\n<nav class=\"navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom\">\n  <a class=\"nav-item nav-link navblack \" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\">\n    <i class=\"fas fa-play\"></i></a>\n  <a class=\"nav-item nav-link navblack\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\">\n    <i class=\"fas fa-eye\"></i></a>\n  <a class=\"nav-item nav-link ml-auto navblack\" routerLink=\"/user/{{userId}}\"><i class=\"  fas fa-user\"></i></a>\n</nav>\n"
+module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar-light bg-light justify-content-start\">\n  <a class=\"nav-item nav-link\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page\">\n    <i class=\"fas fa-chevron-left black-icons\"></i></a>\n  <a class=\"navbar-brand  white-icons\" >Widgets</a>\n  <a class=\"nav-item nav-link ml-auto\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new\">\n    <i class=\"fas fa-plus black-icons\"></i></a>\n</nav>\n\n<div class=\"content container cl-container-padding mt-5\">\n  <div id=\"sortable\" class=\"widget-list\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n    <div *ngFor=\"let widget of widgets\">\n      <table class=\"table table-borderless\">\n        <tbody>\n        <tr>\n          <td>\n            <div [ngSwitch]=\"widget.widgetType\">\n\n              <div *ngSwitchCase=\"'HEADER'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <p [ngStyle]=\"{'font-size': widget.size+'00%', 'text-align': 'center'}\">{{widget.text}}</p>\n              </div>\n              <div *ngSwitchCase=\"'TEXT'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <p [ngStyle]=\"{'font-size': widget.size+'00%', 'text-align': 'center'}\">{{widget.text}}</p>\n              </div>\n\n              <div *ngSwitchCase=\"'IMAGE'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <img class=\"img-responsive img-rounded cl-widget-images\" [src]=\"widget.url\" [width]=\"toNumber(widget.width) * 640\">\n              </div>\n\n\n              <div *ngSwitchCase=\"'YOUTUBE'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <div class=\"embed-responsive embed-responsive-16by9\">\n                  <iframe [width]=\"toNumber(widget.width) * 640\" [height]=\"toNumber(widget.width) * 360\"\n                          [src]=\"convertToSafeYoutubeUrl(widget.url)\" frameborder=\"0\" allowfullscreen></iframe>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"pull-right\">\n                    <span class=\"glyphicon glyphicon-menu-hamburger\"></span></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\" class=\"pull-right\">\n                    <span class=\"glyphicon glyphicon-cog\"></span></a>\n                </div>\n              </div>\n\n              <div *ngSwitchCase=\"'HTML'\">\n                <div class=\"float-right\">\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\" class=\"float-right\">\n                    <i class=\"fas fa-bars\"></i></a>\n                  <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}\">\n                    <i class=\"fas fa-cog\"></i></a>\n                </div>\n                <div [innerHTML]=\"widget.text\"></div>\n              </div>\n            </div>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n\n\n<nav class=\"navbar navbar-expand-lg navbar-primary bg-light justify-content-start fixed-bottom\">\n  <a class=\"nav-item nav-link navblack \" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\">\n    <i class=\"fas fa-play\"></i></a>\n  <a class=\"nav-item nav-link navblack\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\">\n    <i class=\"fas fa-eye\"></i></a>\n  <a class=\"nav-item nav-link ml-auto navblack\" routerLink=\"/user/{{userId}}\"><i class=\"  fas fa-user\"></i></a>\n</nav>\n"
 
 /***/ }),
 

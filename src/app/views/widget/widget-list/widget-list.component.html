@@ -7,7 +7,7 @@
 </nav>
 
 <div class="content container cl-container-padding mt-5">
-  <div class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
+  <div id="sortable" class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
     <div *ngFor="let widget of widgets">
       <table class="table table-borderless">
         <tbody>

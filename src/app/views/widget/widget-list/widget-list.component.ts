@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
@@ -33,6 +34,7 @@ export class WidgetListComponent implements OnInit {
     });
   }
   reorderWidgets(indexes) {
+
     this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
         .subscribe();
   }

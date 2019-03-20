@@ -28,6 +28,7 @@ import { WidgetService } from './services/widget.service.client';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
 import {SharedService} from './services/shared.service.client';
+import {SortableDirective} from './directives.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {SharedService} from './services/shared.service.client';
     WidgetImageComponent,
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
-    WidgetTextComponent
+    WidgetTextComponent,
+    SortableDirective,
   ],
   imports: [
     BrowserModule,
