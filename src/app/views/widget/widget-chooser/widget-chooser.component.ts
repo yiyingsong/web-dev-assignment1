@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../models/widget.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-widget-chooser',
   templateUrl: './widget-chooser.component.html',
   styleUrls: ['./widget-chooser.component.css']
 })
+
 export class WidgetChooserComponent implements OnInit {
 
   userId: String;
@@ -16,8 +18,7 @@ export class WidgetChooserComponent implements OnInit {
   widget: Widget;
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService) {
-  }
+              private sharedService: SharedService) { }
 
   createWidget(widgetType) {
     this.widget.widgetType = widgetType;
@@ -45,4 +46,5 @@ export class WidgetChooserComponent implements OnInit {
     this.widget = new Widget('', '');
 
   }
+
 }

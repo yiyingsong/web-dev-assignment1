@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import {Website} from '../../../models/website.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-website-edit',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../../services/shared.service.client';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
@@ -11,7 +12,7 @@ import {environment} from '../../../../../environments/environment';
 })
 export class WidgetImageComponent implements OnInit {
 
-    flag = false; // setting error flag as false by default
+    flag = false;
     userId: string;
     websiteId: string;
     pageId: string;
@@ -41,7 +42,6 @@ export class WidgetImageComponent implements OnInit {
 
     updateWidget() {
 
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;
         } else {

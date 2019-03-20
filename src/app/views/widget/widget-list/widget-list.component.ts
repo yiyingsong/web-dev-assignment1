@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
+import {SharedService} from '../../../services/shared.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Widget} from '../../../models/widget.model.client';
 
@@ -32,7 +33,6 @@ export class WidgetListComponent implements OnInit {
     });
   }
   reorderWidgets(indexes) {
-    // call widget service function to update widget as per index
     this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
         .subscribe();
   }

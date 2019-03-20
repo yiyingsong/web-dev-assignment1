@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
 import {Page} from '../../../models/page.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
     selector: 'app-page-list',
@@ -10,6 +11,7 @@ import {Page} from '../../../models/page.model.client';
 })
 
 export class PageListComponent implements OnInit {
+
     userId: String;
     websiteId: String;
     pages: Page[] = [];
@@ -24,6 +26,7 @@ export class PageListComponent implements OnInit {
             }
         );
         this.pageService.findPagesByWebsiteId(this.websiteId).subscribe((data: any) => {
+            this.sharedService.pages = data;
             this.pages = data;
         });
     }

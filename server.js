@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'dist/yi-project1')));
+app.use(express.static(path.join(__dirname, 'dist/web-dev-assignment1')));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +24,7 @@ const server = http.createServer(app);
 require('./assignment/app.js')(app);
 
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'dist/yi-project1/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/web-dev-assignment1/index.html'));
 });
 
 server.listen( port , () => console.log('Running on port 3200'));

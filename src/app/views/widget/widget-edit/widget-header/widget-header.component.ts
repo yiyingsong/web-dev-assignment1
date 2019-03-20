@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../../services/shared.service.client';
 
 @Component({
     selector: 'app-widget-header',
@@ -10,7 +11,7 @@ import {Widget} from '../../../../models/widget.model.client';
 })
 export class WidgetHeaderComponent implements OnInit {
 
-    flag = false; // setting error flag as false by default
+    flag = false;
     error: string;
     alert: string;
     userId: string;
@@ -25,7 +26,6 @@ export class WidgetHeaderComponent implements OnInit {
 
     ngOnInit() {
 
-        // initialize error and alert text
         this.error = 'Enter the name of the widget';
         this.alert = '* Enter the widget name';
 
@@ -48,7 +48,6 @@ export class WidgetHeaderComponent implements OnInit {
 
     updateWidget() {
 
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;
         } else {

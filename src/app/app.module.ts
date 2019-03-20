@@ -27,6 +27,7 @@ import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
+import {SharedService} from './services/shared.service.client';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widg
     FormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../../services/shared.service.client';
 
 @Component({
   selector: 'app-widget-html',
@@ -10,7 +12,7 @@ import {Widget} from '../../../../models/widget.model.client';
 })
 export class WidgetHtmlComponent implements OnInit {
 
-  flag = false; // setting error flag as false by default
+  flag = false;
   error: string;
   alert: string;
   userId: string;
@@ -25,7 +27,6 @@ export class WidgetHtmlComponent implements OnInit {
 
   ngOnInit() {
 
-    // initialize error and alert text
     this.error = 'Enter the name of the widget';
     this.alert = '* Enter the widget name';
 
@@ -37,7 +38,6 @@ export class WidgetHtmlComponent implements OnInit {
               this.pageId = params['pid'];
               this.widgetId = params['wgid'];
               this.widgets = this.sharedService.widgets;
-              // this.widget = this.sharedService.widget;
             }
         );
 

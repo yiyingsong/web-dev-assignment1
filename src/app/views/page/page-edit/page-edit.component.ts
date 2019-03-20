@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
 import {Page} from '../../../models/page.model.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -28,6 +29,7 @@ export class PageEditComponent implements OnInit {
       });
     });
   }
+
   deletePage() {
     this.pageService.deletePage(this.pageId).subscribe((data: any) => (data: Page) => {
       console.log('delete page: ' + this.page._id);

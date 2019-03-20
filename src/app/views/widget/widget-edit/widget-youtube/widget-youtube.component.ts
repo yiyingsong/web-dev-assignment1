@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Widget} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../../services/shared.service.client';
 
 @Component({
     selector: 'app-widget-youtube',
@@ -10,7 +11,7 @@ import {Widget} from '../../../../models/widget.model.client';
 })
 export class WidgetYoutubeComponent implements OnInit {
 
-    flag = false; // setting error flag as false by default
+    flag = false;
     userId: string;
     websiteId: string;
     pageId: string;
@@ -40,7 +41,6 @@ export class WidgetYoutubeComponent implements OnInit {
 
     updateWidget() {
 
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;
         } else {
