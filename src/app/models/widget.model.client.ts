@@ -6,6 +6,7 @@ export class Widget {
     text: String;
     url: String;
     width: String;
+    name: String;
 
     constructor(type, pageId, size= '1', text = 'text', width = '100%', url = 'url') {
         this.widgetType = type;
@@ -13,5 +14,6 @@ export class Widget {
         this.size = size;
         this.url = url;
         this.width = width;
+        this.name = '';
     }
 }

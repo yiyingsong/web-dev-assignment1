@@ -37,7 +37,6 @@ module.exports= function(app){
         let widget = req.body;
         widget._id = Math.floor(Math.random() * 1000).toString();
         widget.pageId = req.params['pageId'];
-        // widget.name = "name";
 
         console.log(widget);
         widgets.push(widget);
@@ -168,7 +167,6 @@ module.exports= function(app){
         let destination   = myFile.destination;  // folder where file is saved to
         let size          = myFile.size;
         let mimetype      = myFile.mimetype;
-        // let name = myFile.name;
 
         let url = '/assets/uploads/' + filename;
         console.log(url);
