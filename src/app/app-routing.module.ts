@@ -12,25 +12,27 @@ import {PageEditComponent} from './views/page/page-edit/page-edit.component';
 import {WidgetListComponent} from './views/widget/widget-list/widget-list.component';
 import {WidgetChooserComponent} from './views/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './views/widget/widget-edit/widget-edit.component';
+import {FlickrImageSearchComponent} from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 
 const routes: Routes = [
-    { path: '', component: LoginComponent},
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'user/:uid', component: ProfileComponent },
-    { path: 'user/:uid/website', component: WebsiteListComponent },
-    { path: 'user/:uid/website/new', component: WebsiteNewComponent },
-    { path: 'user/:uid/website/:wid', component: WebsiteEditComponent },
-    { path: 'user/:uid/website/:wid/page', component: PageListComponent },
-    { path: 'user/:uid/website/:wid/page/new', component: PageNewComponent },
-    { path: 'user/:uid/website/:wid/page/:pid', component: PageEditComponent },
-    { path: 'user/:uid/website/:wid/page/:pid/widget', component: WidgetListComponent },
-    { path: 'user/:uid/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent },
-    { path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent },
+  { path: '', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'user/:uid', component: ProfileComponent },
+  { path: 'user/:uid/website', component: WebsiteListComponent },
+  { path: 'user/:uid/website/new', component: WebsiteNewComponent },
+  { path: 'user/:uid/website/:wid', component: WebsiteEditComponent },
+  { path: 'user/:uid/website/:wid/page', component: PageListComponent },
+  { path: 'user/:uid/website/:wid/page/new', component: PageNewComponent },
+  { path: 'user/:uid/website/:wid/page/:pid', component: PageEditComponent },
+  { path: 'user/:uid/website/:wid/page/:pid/widget', component: WidgetListComponent },
+  { path: 'user/:uid/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent },
+  { path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent },
+  { path: 'user/:uid/website/:wid/page/:pid/widget/:wgid/flickr', component: FlickrImageSearchComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

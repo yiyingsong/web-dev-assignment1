@@ -1,28 +1,41 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Widget} from '../models/widget.model.client';
 
 @Injectable()
 export  class WidgetService {
     baseUrl = environment.baseUrl;
+
     constructor(private _http: HttpClient) {}
-    createWidget(pageId, widget: Widget) {
-        return this._http.post(this.baseUrl + '/api/page/' + pageId + '/widget', widget);
+
+
+    createWidget(pageId, widget: any) {
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget';
+        return this._http.post(url, widget);
     }
+
     findWidgetsByPageId(pageId) {
-        return this._http.get(this.baseUrl + '/api/page/' + pageId + '/widget');
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget';
+        return this._http.get(url);
     }
+
     findWidgetById(widgetId) {
-        return this._http.get(this.baseUrl + '/api/widget/' + widgetId);
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.get(url);
     }
+
     updateWidget(widgetId, widget) {
-        return this._http.put(this.baseUrl + '/api/widget/' + widgetId, widget);
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.put(url, widget);
     }
+
     deleteWidget(widgetId) {
-        return this._http.delete(this.baseUrl + '/api/widget/' + widgetId);
+        const url = this.baseUrl + '/api/widget/' + widgetId;
+        return this._http.delete(url);
     }
+
     reorderWidgets(startIndex, endIndex, pageId) {
-        return this._http.put(this.baseUrl + '/api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex, '');
+        const url = this.baseUrl + '/api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex;
+        return this._http.put(url, '');
     }
 }

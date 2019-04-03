@@ -1,28 +1,36 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Page} from '../models/page.model.client';
-
 
 @Injectable()
 export class PageService {
 
     baseUrl = environment.baseUrl;
+
     constructor(private _http: HttpClient) {
     }
-    createPage(websiteId: String, page: Page) {
+
+    createPage(websiteId: String, page: any) {
         return this._http.post(this.baseUrl + '/api/website/' + websiteId + '/page', page);
     }
+
     findPagesByWebsiteId(websiteId) {
-        return this._http.get(this.baseUrl + '/api/website/' + websiteId + '/page');
+        const url = this.baseUrl + '/api/website/' + websiteId + '/page';
+        return this._http.get(url);
     }
+
     findPageById(pageId) {
-        return this._http.get(this.baseUrl + '/api/page/' + pageId);
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.get(url);
     }
+
     updatePage(pageId, page) {
-        return this._http.put(this.baseUrl + '/api/page/' + pageId, page);
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.put(url, page);
     }
+
     deletePage(pageId) {
-        return this._http.delete(this.baseUrl + '/api/page/' + pageId);
+        const url = this.baseUrl + '/api/page/' + pageId;
+        return this._http.delete(url);
     }
 }

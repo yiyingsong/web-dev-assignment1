@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SortableDirective} from './directives/sortable.directive';
+import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,8 +29,10 @@ import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
-import {SharedService} from './services/shared.service.client';
-import {SortableDirective} from './directives.directive';
+import { SharedService } from './services/shared.service.client';
+import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import { FlickrService } from './services/flickr.service.client';
+import { OrderByPipe } from './views/widget/widget-list/order.pipe';
 
 @NgModule({
   declarations: [
@@ -48,17 +52,20 @@ import {SortableDirective} from './directives.directive';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
+    SortableDirective,
     WidgetHtmlComponent,
     WidgetTextComponent,
-    SortableDirective,
+    FlickrImageSearchComponent,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    QuillModule,
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, SharedService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, SharedService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
