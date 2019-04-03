@@ -9,7 +9,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 })
 export class WidgetHeaderComponent implements OnInit {
 
-    flag = false; // setting error flag as false by default
+    flag = false;
     error: string;
     alert: string;
     userId: string;
@@ -45,7 +45,6 @@ export class WidgetHeaderComponent implements OnInit {
 
     updateWidget() {
 
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;
         } else {

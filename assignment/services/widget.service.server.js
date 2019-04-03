@@ -24,7 +24,6 @@ module.exports= function(app){
 
     let upload = multer({ storage: storage });
 
-
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget",findAllWidgetsForPage);
     app.get("/api/widget/:widgetId",findWidgetById);
@@ -33,7 +32,6 @@ module.exports= function(app){
 
     app.put("/api/page/:pageId/widget?",reorderWidgets);
 
-    //UPLOAD
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
     function createWidget (req,res) {
@@ -114,7 +112,7 @@ module.exports= function(app){
         let width         = req.body.width;
         let myFile        = req.file;
 
-        // let baseUrl = 'http://localhost:3200';
+        // let baseUrl = 'http://localhost:3200'; when testing locally
         let baseUrl = 'https://web-dev-assignment1.herokuapp.com';
         const callbackUrl = baseUrl + '/user/' + userId + "/website/" + websiteId
             + "/page/" + pageId + "/widget";

@@ -9,7 +9,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 })
 export class WidgetHtmlComponent implements OnInit {
 
-    flag = false; // setting error flag as false by default
+    flag = false;
     error: string;
     alert: string;
     userId: string;
@@ -23,7 +23,6 @@ export class WidgetHtmlComponent implements OnInit {
 
     ngOnInit() {
 
-        // initialize error and alert text
         this.error = 'Enter the name of the widget';
         this.alert = '* Enter the widget name';
 
@@ -46,7 +45,6 @@ export class WidgetHtmlComponent implements OnInit {
 
     updateWidget() {
 
-        // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
             this.flag = true;
         } else {

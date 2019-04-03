@@ -68,4 +68,5 @@ import { OrderByPipe } from './views/widget/widget-list/order.pipe';
   providers: [UserService, WebsiteService, PageService, WidgetService, SharedService, FlickrService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -1,8 +1,8 @@
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-let widgetSchema = require('./widget.schema.server');
-let widgetModel = mongoose.model("Widgets", widgetSchema);
-let pageModel = require('../page/page.model.server');
+var widgetSchema = require('./widget.schema.server');
+var widgetModel = mongoose.model("Widgets", widgetSchema);
+var pageModel = require('../page/page.model.server');
 
 module.exports = widgetModel;
 

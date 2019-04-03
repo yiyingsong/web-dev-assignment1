@@ -1,7 +1,6 @@
 module.exports = function (app) {
 
     app.post("/api/user", createUser);
-    //app.get("/api/user?username=*", findUserByName);
     app.get("/api/user?", findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -109,6 +108,5 @@ module.exports = function (app) {
                 }
             );
     }
-
 
 }

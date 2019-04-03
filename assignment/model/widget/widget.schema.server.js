@@ -1,4 +1,4 @@
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 let widgetSchema = new mongoose.Schema({
     _page:{type: mongoose.Schema.ObjectId, ref:"Page"},

@@ -29,7 +29,7 @@ app.get('*', function (req, res) {
 
 server.listen( port , () => console.log('Running on port 3200'));
 
-// const connectionString = 'mongodb://127.0.0.1:27017/webdev';
+// const connectionString = 'mongodb://127.0.0.1:27017/webdev'; for testing locally
 const connectionString = 'mongodb://sophie:Sophie1108@ds121406.mlab.com:21406/heroku_3m3js2gz';
 let mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
