@@ -1,33 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
-.list {
+#title {
+    text-align: center;
+    margin-top: 20px;
+}
+.padding {
+    padding: 30px;
+}
+.site {
     color: #1d2786;
     font-size: 16pt;
     margin: auto;
 }
-
-.list:hover {
-    color: #6a65d8;
-    display: inline-block;
-    transform: rotate(5deg);
-    text-decoration: none;
+label {
+    font-weight: bold;
 }
-.group {
-    padding: 30px;
-}
-.part {
+.input {
     margin-bottom: 10px
 }
 #hidden {
     color: #007bff;
-}
-.down {
-    margin-top: 15px
 }
 .setting {
     margin-top: 5px;
 }
 .white-icons {
     color: white;
+}
+.black-icons {
+    color: black;
 }
 .move-left {
     margin-left: 20px;
@@ -38,8 +38,8 @@
 .move-up {
     margin-top: 20px;
 }
-.black-icons {
-    color: black;
+.move-down {
+    margin-top: 15px
 }
 .blue {
     color: #007bff;
@@ -47,17 +47,8 @@
 .content {
     margin-bottom: 80px;
 }
-label {
-    font-weight: bold;
-}
-#title {
-    text-align: center;
-    margin-top: 20px;
-}
+
 .fa-bars {
     margin-left: 5px;
-}
-.space {
-    margin-top: 80px;
 }
 

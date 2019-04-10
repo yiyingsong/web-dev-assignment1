@@ -1,5 +1,4 @@
 export class Website {
-
     name: String;
     userId: String;
     description: String;

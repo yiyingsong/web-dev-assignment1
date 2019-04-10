@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var websiteSchema = require('../website/website.schema.server');
+let mongoose = require('mongoose');
+let websiteSchema = require('../website/website.schema.server');
 
 let userSchema = new mongoose.Schema({
     username: String,
@@ -9,7 +9,8 @@ let userSchema = new mongoose.Schema({
     phone: String,
     email: String,
     dateCreated: {type: Date, default: Date.now()},
-    websites: [websiteSchema]
+    websites: [websiteSchema],
+    facebook: { id: String,  token: String }
 },{collection:'Users'});
 
 module.exports = userSchema;

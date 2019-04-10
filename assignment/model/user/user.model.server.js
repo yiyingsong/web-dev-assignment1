@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var userSchema = require('./user.schema.server');
+let mongoose = require('mongoose');
+let userSchema = require('./user.schema.server');
 
-var userModel = mongoose.model("User",userSchema);
+let userModel = mongoose.model("User",userSchema);
 
 
 userModel.createUser = createUser;
@@ -10,8 +10,13 @@ userModel.findUserByUserName = findUserByUserName;
 userModel.findByCredential = findByCredential;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 module.exports = userModel;
+
+  function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
 
 function createUser(user) {
     console.log("model"+user);
@@ -31,12 +36,14 @@ function findByCredential(username,password){
 }
 
 function updateUser(userId,user) {
+    console.log('user model update: ' + user);
+    delete user._id;
     return userModel.findOneAndUpdate(userId,user);
 }
 
 function deleteUser(userId){
     return userModel.findOneAndRemove(userId).then(function (user) {
-        console.log('user model: ' + user);
+        console.log('user model delete: ' + user);
         return user;
     });
 }

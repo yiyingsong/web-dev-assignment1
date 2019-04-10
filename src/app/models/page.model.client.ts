@@ -1,5 +1,4 @@
 export class Page {
-
     name: String;
     websiteId: String;
     title: String;

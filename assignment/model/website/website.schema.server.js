@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var pageSchema = require('../page/page.schema.server');
+let mongoose = require('mongoose');
+let pageSchema = require('../page/page.schema.server');
 
 let websiteSchema = mongoose.Schema({
         _user: {type: mongoose.Schema.ObjectId, ref: "User"},
