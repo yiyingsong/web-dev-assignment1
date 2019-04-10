@@ -43,22 +43,11 @@ export class UserService {
             password : password
         };
         return this._http.post(this.baseUrl + '/api/login', body, {headers: this.options, withCredentials: true});
-            // .pipe(map(
-            //         (res: Response) => {
-            //             const data = res.json();
-            //             return data;
-            //         }
-            //     ));
     }
 
     logout() {
         return this._http.post(this.baseUrl + '/api/logout', '', {headers: this.options, withCredentials: true});
-    // .pipe(map(
-    //         (res: Response) => {
-    //             const data = res.json();
-    //             return data;
-    //         }
-    //     ));
+
     }
 
     register(username: String, password: String) {
@@ -70,13 +59,6 @@ export class UserService {
 
         return this._http.post(this.baseUrl + '/api/register', user, {withCredentials: true});
 
-            // .pipe(map(
-            //     async (res: Response) => {
-            //         const data = await res.json();
-            //         console.log('user client: ' + data);
-            //         return data;
-            //     }
-            // ));
     }
 
     loggedIn() {
@@ -96,10 +78,6 @@ export class UserService {
                 }
             ));
     }
-
-    // facebook() {
-    //     return this._http.get('/facebook/login');
-    // }
 
 
 }

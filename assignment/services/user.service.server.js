@@ -6,21 +6,15 @@ module.exports = function (app) {
     const FacebookStrategy = require('passport-facebook').Strategy;
     const bcrypt = require("bcrypt-nodejs");
 
-
     app.post("/api/user", createUser);
-    //app.get("/api/user?username=*", findUserByName);
     app.get("/api/user?", findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
     app.post('/api/logout', logout);
-
     app.post  ('/api/login', passport.authenticate('local'), login);
-
     app.post ('/api/register', register);
-
     app.get ('/api/loggedin', loggedin);
-
     app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {  successRedirect: '/#/profile/',  failureRedirect: '/#/login' }));
@@ -29,6 +23,8 @@ module.exports = function (app) {
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: process.env.FACEBOOK_CALLBACK_URL
+
+        // for local testing only
         //clientID: 381254859272034,
         //clientSecret: 'a9597499da17da29ffef8ca5fac3600a',
         //callbackURL: '/auth/facebook/callback'
@@ -37,9 +33,7 @@ module.exports = function (app) {
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-
     passport.use(new LocalStrategy(localStrategy));
-
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     function facebookStrategy(token, refreshToken, profile, done) {
@@ -234,6 +228,4 @@ module.exports = function (app) {
                 }
             );
     }
-
-
 }

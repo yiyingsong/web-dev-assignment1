@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-@Injectable() // needed as we're injecting Http service into this service
+@Injectable()
 export class FlickrService {
 
     key = 'a32a09860e5dde7b565eacf533abafd8';

@@ -122,23 +122,18 @@ module.exports= function(app) {
             cb(null, __dirname + '/../../dist/web-dev-assignment1/assets/uploads/')
         },
         filename: function (req, file, cb) {
-            cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+            cb(null, Date.now() + path.extname(file.originalname))
         }
     })
 
     let upload = multer({storage: storage});
-
-    /* John pappy's - declare APIs at top and write functions below */
 
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
-
     app.put("/api/page/:pageId/widget?", reorderWidgets);
-
-    //UPLOAD
     app.post("/api/upload", upload.single('myFile'), uploadImage);
 
     function createWidget(req, res) {
@@ -239,7 +234,6 @@ module.exports= function(app) {
                 widget.url = url;
                 widgetModel.updateWidget(widgetId, widget).then(function (widget) {
                     console.log('widget server updated url: ');
-                    // res.json(widget);
                     res.redirect('/#/website/' + websiteId + '/page/' + pageId + '/widget/' + widgetId);
                 });
             }

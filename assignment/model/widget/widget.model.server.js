@@ -1,8 +1,7 @@
-let mongoose = require('mongoose');
-
-let widgetSchema = require('./widget.schema.server');
-let widgetModel = mongoose.model("Widgets", widgetSchema);
-let pageModel = require('../page/page.model.server');
+var mongoose = require('mongoose');
+var widgetSchema = require('./widget.schema.server');
+var widgetModel = mongoose.model("Widgets", widgetSchema);
+var pageModel = require('../page/page.model.server');
 
 module.exports = widgetModel;
 
@@ -12,7 +11,6 @@ widgetModel.findWidgetById = findWidgetById;
 widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.reorderWidgets = reorderWidget;
-
 
 function createWidget(pageId,widget) {
     widget._page = pageId;
