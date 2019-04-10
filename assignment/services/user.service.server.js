@@ -22,16 +22,16 @@ module.exports = function (app) {
     app.get ('/api/loggedin', loggedin);
 
     app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback', 
+    app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {  successRedirect: '/#/profile/',  failureRedirect: '/#/login' }));
 
     const facebookConfig = {
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL
-        //clientID: 381254859272034,
-        //clientSecret: 'a9597499da17da29ffef8ca5fac3600a',
-        //callbackURL: '/auth/facebook/callback'
+        //clientID: process.env.FACEBOOK_CLIENT_ID,
+        //clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        //callbackURL: process.env.FACEBOOK_CALLBACK_URL
+        clientID: 381254859272034,
+        clientSecret: 'a9597499da17da29ffef8ca5fac3600a',
+        callbackURL: '/auth/facebook/callback'
     };
 
 
@@ -42,11 +42,11 @@ module.exports = function (app) {
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
-    function facebookStrategy(token, refreshToken, profile, done) { 
-        userModel .findUserByFacebookId(profile.id).then( function(user) { 
-            if(user) { 
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel .findUserByFacebookId(profile.id).then( function(user) {
+            if(user) {
                 return user;
-             } else {
+            } else {
                 const names = profile.displayName.split(" ");
                 const newFacebookUser = {
                     lastName: names[1],
@@ -58,23 +58,23 @@ module.exports = function (app) {
                     }
                 };
                 return userModel.createUser(newFacebookUser);
-             } 
-            }, function(err) { 
-                if (err) { return done(err); } 
-            } ) .then( 
-                function(user){
-                    console.log('facebook: ' + user);
-                    try{
-                        return done(null, user);
-                    } catch (e) {
-                        console.log(e);
-                    }
+            }
+        }, function(err) {
+            if (err) { return done(err); }
+        } ) .then(
+            function(user){
+                console.log('facebook: ' + user);
+                try{
+                    return done(null, user);
+                } catch (e) {
+                    console.log(e);
+                }
 
-                },
-                function(err){ 
-                        if (err) { return done(err); } 
-                } 
-            ); 
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
     }
 
     function loggedin(req, res) {
