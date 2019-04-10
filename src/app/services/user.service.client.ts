@@ -84,7 +84,7 @@ export class UserService {
             .pipe(map(
                 (res: any) => {
                     // const user = JSON.stringify(res);
-                    const user = res.json();
+                    const user = res;
                     console.log('user client loggedIn: ' + user);
                     if (user !== '0') {
                         this.sharedService.user = user; // setting user so as to share with all components
