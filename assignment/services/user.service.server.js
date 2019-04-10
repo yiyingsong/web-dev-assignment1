@@ -26,12 +26,12 @@ module.exports = function (app) {
         passport.authenticate('facebook', {  successRedirect: '/#/profile/',  failureRedirect: '/#/login' }));
 
     const facebookConfig = {
-        //clientID: process.env.FACEBOOK_CLIENT_ID,
-        //clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        //callbackURL: process.env.FACEBOOK_CALLBACK_URL
-        clientID: 381254859272034,
-        clientSecret: 'a9597499da17da29ffef8ca5fac3600a',
-        callbackURL: '/auth/facebook/callback'
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL
+        //clientID: 381254859272034,
+        //clientSecret: 'a9597499da17da29ffef8ca5fac3600a',
+        //callbackURL: '/auth/facebook/callback'
     };
 
 
